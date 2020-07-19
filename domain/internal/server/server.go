@@ -7,6 +7,7 @@ import (
 )
 
 func NewServer(s *service.Service){
+	s.InitRoutes()
 	server := http.Server{
 		Addr: ":22222",
 		Handler: s.Router,
@@ -17,3 +18,4 @@ func NewServer(s *service.Service){
 		}
 	}()
 }
+

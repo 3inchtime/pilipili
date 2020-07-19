@@ -6,6 +6,11 @@ import (
 	"pilipili/backend/model"
 )
 
+func(s *Service) InitRoutes() {
+	s.Router.GET("/video", s.HttpGetVideoInfo)
+	s.Router.POST("/video", s.HttpCreateVideo)
+}
+
 func(s *Service) HttpGetVideoInfo (ctx *gin.Context){
 	id := ctx.Query("id")
 	v := s.dao.GetVideoInfo(id)

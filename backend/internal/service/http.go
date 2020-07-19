@@ -6,7 +6,7 @@ import (
 	"pilipili/backend/model"
 )
 
-func(s *Service) GetVideoInfo(ctx *gin.Context){
+func(s *Service) HttpGetVideoInfo (ctx *gin.Context){
 	id := ctx.Query("id")
 	v := s.dao.GetVideoInfo(id)
 	ctx.JSON(http.StatusOK, gin.H{
@@ -18,7 +18,7 @@ func(s *Service) GetVideoInfo(ctx *gin.Context){
 	})
 }
 
-func (s *Service)CreateVideo(ctx *gin.Context){
+func (s *Service) HttpCreateVideo (ctx *gin.Context){
 	title := ctx.PostForm("title")
 	note := ctx.PostForm("note")
 	pic := ctx.PostForm("pic")
@@ -34,3 +34,4 @@ func (s *Service)CreateVideo(ctx *gin.Context){
 
 	ctx.String(http.StatusOK, "OK")
 }
+

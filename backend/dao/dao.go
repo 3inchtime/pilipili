@@ -20,5 +20,6 @@ func NewDB() *sql.DB {
 	if err != nil {
 		panic(err)
 	}
+	Mysql.SetMaxOpenConns(10)
 	return Mysql
 }

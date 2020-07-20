@@ -28,6 +28,7 @@ func (d *Dao) GetAllVideo() []*model.Video {
 		}
 		videoList = append(videoList, v)
 	}
+	defer querySQL.Close()
 	return videoList
 }
 
@@ -35,21 +36,16 @@ func (d *Dao) GetVideoInfo(id string) *model.Video {
 	querySQL, err := d.DB.Prepare("SELECT title, note, pic_path, video_path FROM video WHERE id = ?")
 	if err != nil {
 		logrus.Errorf("Prepare Select SQL Error: %s", err.Error())
+		return nil
 	}
 
+	defer querySQL.Close()
 	v := new(model.Video)
-	rows, err := querySQL.Query(id)
+	err = querySQL.QueryRow(id).Scan(&v.Title, &v.Note, &v.PicPath, &v.VideoPath)
 	if err != nil && err != sql.ErrNoRows {
 		logrus.Errorf("Query Video Error: %s", err.Error())
 	}
-	for rows.Next() {
-		err = rows.Scan(&v.Title, &v.Note, &v.PicPath, &v.VideoPath)
-		if err != nil {
-			logrus.Errorf("Scan Query Error: %s", err.Error())
-		}
-		return v
-	}
-	return nil
+	return v
 }
 
 func (d *Dao) CreateNewVideo(v *model.Video) {

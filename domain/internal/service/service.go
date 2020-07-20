@@ -10,18 +10,18 @@ import (
 
 type Service struct {
 	Router *gin.Engine
-	RPC *pb.PilipiliClient
+	RPC    pb.PilipiliClient
 }
 
 func NewService() *Service {
 	s := &Service{
-		Router : gin.Default(),
-		RPC: NewGRPC(),
+		Router: gin.Default(),
+		RPC:    NewGRPC(),
 	}
 	return s
 }
 
-func NewGRPC() *pb.PilipiliClient {
+func NewGRPC() pb.PilipiliClient {
 	Address := "127.0.0.1:23332"
 	conn, err := grpc.Dial(Address, grpc.WithInsecure())
 
@@ -31,5 +31,5 @@ func NewGRPC() *pb.PilipiliClient {
 	}
 
 	c := pb.NewPilipiliClient(conn)
-	return &c
+	return c
 }

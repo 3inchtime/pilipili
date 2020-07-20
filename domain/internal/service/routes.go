@@ -1,6 +1,6 @@
 package service
 
-func(s *Service) InitRoutes() {
+func (s *Service) InitRoutes() {
 	httpRoutes := s.Router.Group("/http")
 	{
 		httpRoutes.GET("/get_video", s.HttpGetVideoInfo)

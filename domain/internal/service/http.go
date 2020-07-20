@@ -11,7 +11,7 @@ import (
 
 const address = "http://0.0.0.0:23333/video"
 
-func(s *Service) HttpGetVideoInfo (ctx *gin.Context){
+func (s *Service) HttpGetVideoInfo(ctx *gin.Context) {
 	id := ctx.Query("id")
 	resp, err := http.Get(address + fmt.Sprintf("?id=%s", id))
 	if err != nil {
@@ -29,7 +29,7 @@ func(s *Service) HttpGetVideoInfo (ctx *gin.Context){
 	}
 }
 
-func(s *Service) HttpCreateVideo (ctx *gin.Context){
+func (s *Service) HttpCreateVideo(ctx *gin.Context) {
 	title := ctx.PostForm("title")
 	note := ctx.PostForm("note")
 	pic := ctx.PostForm("pic")
@@ -37,8 +37,8 @@ func(s *Service) HttpCreateVideo (ctx *gin.Context){
 
 	resp, err := http.PostForm(address, url.Values{
 		"title": {title},
-		"note": {note},
-		"pic": {pic},
+		"note":  {note},
+		"pic":   {pic},
 		"video": {video},
 	})
 	if err != nil {
@@ -47,7 +47,7 @@ func(s *Service) HttpCreateVideo (ctx *gin.Context){
 
 	defer resp.Body.Close()
 
-    if resp.StatusCode == 200 {
+	if resp.StatusCode == 200 {
 		ctx.String(http.StatusOK, "OK")
 	} else {
 		ctx.String(http.StatusInternalServerError, "Failed")

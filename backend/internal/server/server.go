@@ -11,7 +11,7 @@ import (
 func NewHttpServer(s *service.Service) {
 	s.InitRoutes()
 	server := http.Server{
-		Addr: ":23333",
+		Addr:    ":23333",
 		Handler: s.Router,
 	}
 	go func() {

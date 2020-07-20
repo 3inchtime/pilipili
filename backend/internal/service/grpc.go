@@ -5,8 +5,6 @@ import (
 	pb "pilipili/proto"
 )
 
-
-
 func (s *Service) RpcGetVideoInfo(ctx context.Context, request *pb.GetVideoRequest) (*pb.VideoInfo, error) {
 	id := request.Id
 	v := s.dao.GetVideoInfo(id)
@@ -25,4 +23,3 @@ func (s *Service) RpcGetVideoInfo(ctx context.Context, request *pb.GetVideoReque
 func (s *Service) RpcCreateVideoInfo(ctx context.Context, info *pb.VideoInfo) (*pb.CreateVideoReplay, error) {
 	panic("implement me")
 }
-

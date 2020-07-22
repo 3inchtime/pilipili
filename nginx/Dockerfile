@@ -8,4 +8,4 @@ EXPOSE 80
 
 WORKDIR /etc/nginx
 
-CMD ["nginx"]
+CMD ["nginx", "-g","daemon off;"]

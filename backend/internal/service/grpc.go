@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"pilipili/backend/model"
 	pb "pilipili/proto"
 )
 
@@ -21,5 +22,18 @@ func (s *Service) RpcGetVideoInfo(ctx context.Context, request *pb.GetVideoReque
 }
 
 func (s *Service) RpcCreateVideoInfo(ctx context.Context, info *pb.VideoInfo) (*pb.CreateVideoReplay, error) {
-	panic("implement me")
+	title := info.Title
+	note := info.Note
+	pic := info.Pic
+	video := info.Video
+
+	v := new(model.Video)
+	v.Title = title
+	v.Note = note
+	v.PicPath = pic
+	v.VideoPath = video
+
+	resp := new(pb.CreateVideoReplay)
+	resp.Status = "OK"
+	return resp, nil
 }
